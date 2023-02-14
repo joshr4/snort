@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import "./AsyncButton.css";
 interface AsyncButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   onClick(e: React.MouseEvent): Promise<void> | void;
   children?: React.ReactNode;
@@ -24,7 +24,12 @@ export default function AsyncButton(props: AsyncButtonProps) {
   }
 
   return (
-    <button type="button" disabled={loading} {...props} onClick={handle}>
+    <button
+      {...props}
+      className={loading ? `${props.className} skeleton` : props.className}
+      type="button"
+      disabled={loading}
+      onClick={handle}>
       {props.children}
     </button>
   );
